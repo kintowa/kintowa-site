@@ -3,232 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>kintowa | kintoneを、現場で使いこなす。</title>
-<meta name="description" content="kintowaは、kintoneの研修・プラグイン販売・チケット制相談会を通じて、現場での活用を支援する会社です。">
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap');
-
-  :root{
-    --bg-dark:#12222B;
-    --bg-dark-2:#0E1B22;
-    --bg-light:#EFEAE0;
-    --ink:#182228;
-    --paper:#F4F0E6;
-    --muted-on-light:#5B655F;
-    --muted-on-dark:#AEB9B4;
-    --stamp:#B4472A;
-    --stamp-soft:#B4472A1a;
-    --field:#3E7A6B;
-    --field-soft:#3E7A6B26;
-    --line-light:#D2CBB8;
-    --line-dark:#2A3A41;
-    --radius:2px;
-  }
-
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    font-family:'Zen Kaku Gothic New', sans-serif;
-    background:var(--bg-light);
-    color:var(--ink);
-    line-height:1.85;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3{
-    font-family:'Shippori Mincho', serif;
-    font-weight:600;
-    line-height:1.5;
-    margin:0;
-  }
-  a{color:inherit;text-decoration:none;}
-  img,svg{display:block;max-width:100%;}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
-  section{padding:96px 0;}
-  @media (max-width:640px){ section{padding:64px 0;} }
-
-  .kicker{
-    font-size:12px;
-    letter-spacing:.22em;
-    font-weight:700;
-    text-transform:uppercase;
-  }
-  .on-light .kicker{color:var(--stamp);}
-  .on-dark .kicker{color:#E3C9A6;}
-
-  /* ---------- Header ---------- */
-  header{
-    position:sticky; top:0; z-index:50;
-    background:rgba(239,234,224,.92);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--line-light);
-  }
-  .header-inner{
-    max-width:1080px;margin:0 auto;padding:16px 24px;
-    display:flex;align-items:center;justify-content:space-between;
-  }
-  .brand{display:flex;align-items:center;gap:10px;font-family:'Shippori Mincho',serif;font-size:20px;font-weight:800;letter-spacing:.02em;}
-  .brand .ring{width:22px;height:22px;flex:none;}
-  nav.links{display:flex;gap:32px;font-size:14px;letter-spacing:.02em;}
-  nav.links a{color:var(--muted-on-light);border-bottom:1px solid transparent;padding-bottom:2px;transition:color .15s, border-color .15s;}
-  nav.links a:hover{color:var(--ink);border-color:var(--stamp);}
-  .nav-cta{
-    font-size:13px;font-weight:700;color:var(--paper);
-    background:var(--ink);padding:10px 20px;border-radius:var(--radius);
-    letter-spacing:.04em;
-  }
-  @media (max-width:720px){ nav.links{display:none;} }
-
-  /* ---------- Hero ---------- */
-  .hero{
-    background:radial-gradient(120% 140% at 15% 0%, #1B3038 0%, var(--bg-dark) 55%, var(--bg-dark-2) 100%);
-    color:var(--paper);
-    padding-top:120px;
-  }
-  .hero-grid{
-    display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;
-  }
-  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr;} }
-  .hero h1{font-size:clamp(32px,4.6vw,52px);color:var(--paper);margin-top:18px;}
-  .hero h1 em{font-style:normal;color:#E3C9A6;}
-  .hero p.lead{margin-top:22px;color:var(--muted-on-dark);font-size:17px;max-width:44ch;}
-  .hero-cta{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap;}
-  .btn{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:14px 26px;border-radius:var(--radius);
-    font-size:14px;font-weight:700;letter-spacing:.03em;
-    transition:transform .15s ease, background .15s ease;
-  }
-  .btn:hover{transform:translateY(-1px);}
-  .btn-primary{background:var(--stamp);color:var(--paper);}
-  .btn-primary:hover{background:#9C3B21;}
-  .btn-ghost{border:1px solid var(--line-dark);color:var(--paper);}
-  .btn-ghost:hover{border-color:var(--paper);}
-  .on-light .btn-ghost{border:1px solid var(--line-light);color:var(--ink);}
-  .on-light .btn-ghost:hover{border-color:var(--ink);}
-
-  /* field-chip cluster (signature element) */
-  .chips{position:relative;height:320px;}
-  .chip{
-    position:absolute;
-    font-family:'Zen Kaku Gothic New',sans-serif;
-    font-size:13px;font-weight:700;letter-spacing:.02em;
-    padding:10px 16px;border-radius:999px;
-    background:var(--field-soft);
-    color:#BFE3D6;
-    border:1px solid #3E7A6B66;
-    white-space:nowrap;
-  }
-  .chip span.tag{display:block;font-size:9px;letter-spacing:.12em;color:#8FB8AC;font-weight:500;margin-bottom:2px;}
-  .chip.c1{top:6%; left:4%;  transform:rotate(-6deg);}
-  .chip.c2{top:2%; left:52%; transform:rotate(4deg);}
-  .chip.c3{top:32%; left:20%; transform:rotate(3deg);}
-  .chip.c4{top:40%; left:60%; transform:rotate(-4deg);}
-  .chip.c5{top:66%; left:6%;  transform:rotate(5deg);}
-  .chip.c6{top:70%; left:46%; transform:rotate(-3deg);}
-  .chip.highlight{
-    background:var(--stamp-soft);
-    border:1px solid var(--stamp);
-    color:#F4D9C9;
-    box-shadow:0 8px 24px -8px rgba(180,71,42,.55);
-  }
-  .chip .arrow{position:absolute;left:-30px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--stamp);}
-  @media (max-width:860px){ .chips{height:260px;} .chip{font-size:11px;padding:8px 12px;} }
-  @media (max-width:480px){ .chips{display:none;} }
-
-  /* ---------- About ---------- */
-  .about{background:var(--bg-light);}
-  .about-grid{display:grid;grid-template-columns:.5fr 1fr;gap:48px;}
-  @media (max-width:720px){ .about-grid{grid-template-columns:1fr;} }
-  .about h2{font-size:clamp(24px,3vw,32px);}
-  .about p{color:var(--muted-on-light);max-width:56ch;}
-  .rule{width:56px;height:2px;background:var(--stamp);margin:22px 0;}
-
-  /* ---------- Services ---------- */
-  .services{background:var(--bg-dark-2);color:var(--paper);}
-  .services .sec-head{max-width:60ch;margin-bottom:56px;}
-  .services h2{color:var(--paper);font-size:clamp(24px,3vw,32px);margin-top:14px;}
-  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-dark);border:1px solid var(--line-dark);}
-  @media (max-width:820px){ .svc-grid{grid-template-columns:1fr;} }
-  .svc-card{background:var(--bg-dark-2);padding:36px 30px;}
-  .svc-card .tagchip{
-    display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;
-    padding:5px 12px;border-radius:999px;margin-bottom:20px;
-  }
-  .svc-card.f1 .tagchip{background:var(--field-soft);color:#BFE3D6;border:1px solid #3E7A6B66;}
-  .svc-card.f2 .tagchip{background:var(--field-soft);color:#BFE3D6;border:1px solid #3E7A6B66;}
-  .svc-card.f3 .tagchip{background:var(--stamp-soft);color:#F4D9C9;border:1px solid var(--stamp);}
-  .svc-card h3{color:var(--paper);font-size:20px;margin-bottom:14px;}
-  .svc-card p{color:var(--muted-on-dark);font-size:15px;margin:0;}
-
-  /* ---------- Flow ---------- */
-  .flow{background:var(--bg-light);}
-  .flow .sec-head{max-width:60ch;margin-bottom:52px;}
-  .flow h2{font-size:clamp(24px,3vw,32px);}
-  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
-  @media (max-width:860px){ .steps{grid-template-columns:1fr;gap:28px;} }
-  .step{padding:0 24px 0 0;position:relative;}
-  .step:not(:last-child)::after{
-    content:"";position:absolute;top:14px;right:0;width:100%;height:1px;background:var(--line-light);
-  }
-  @media (max-width:860px){ .step:not(:last-child)::after{display:none;} }
-  .step .num{font-family:'Shippori Mincho',serif;font-size:28px;color:var(--stamp);display:block;margin-bottom:14px;}
-  .step h4{font-size:16px;font-weight:700;margin-bottom:8px;font-family:'Zen Kaku Gothic New',sans-serif;}
-  .step p{color:var(--muted-on-light);font-size:14px;margin:0;}
-
-  /* ---------- FAQ ---------- */
-  .faq{background:var(--bg-light);border-top:1px solid var(--line-light);}
-  .faq h2{font-size:clamp(24px,3vw,32px);margin-bottom:40px;}
-  .qa{border-top:1px solid var(--line-light);padding:26px 0;}
-  .qa:last-child{border-bottom:1px solid var(--line-light);}
-  .qa .q{display:flex;gap:14px;font-weight:700;font-size:16px;}
-  .qa .q .mark{color:var(--stamp);font-family:'Shippori Mincho',serif;}
-  .qa .a{margin-top:12px;padding-left:30px;color:var(--muted-on-light);font-size:15px;}
-
-  /* ---------- Contact ---------- */
-  .contact{
-    background:radial-gradient(100% 140% at 85% 100%, #1B3038 0%, var(--bg-dark) 55%, var(--bg-dark-2) 100%);
-    color:var(--paper);
-  }
-  .contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
-  @media (max-width:820px){ .contact-inner{grid-template-columns:1fr;} }
-  .contact h2{color:var(--paper);font-size:clamp(26px,3.4vw,36px);}
-  .contact p.lead{color:var(--muted-on-dark);margin-top:16px;max-width:46ch;}
-  .contact-card{
-    background:#0E1B22;border:1px solid var(--line-dark);border-radius:var(--radius);padding:32px;
-  }
-  .contact-card .row{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line-dark);font-size:14px;}
-  .contact-card .row:last-of-type{border-bottom:none;}
-  .contact-card .row span:first-child{color:var(--muted-on-dark);}
-  .contact-card .row span:last-child{color:var(--paper);font-weight:700;}
-  .contact-note{margin-top:18px;font-size:12px;color:var(--muted-on-dark);line-height:1.7;}
-
-  /* ---------- Footer ---------- */
-  footer{background:var(--bg-dark-2);color:var(--muted-on-dark);border-top:1px solid var(--line-dark);}
-  .footer-inner{display:flex;justify-content:space-between;align-items:center;padding:28px 0;font-size:13px;flex-wrap:wrap;gap:12px;}
-  .footer-inner .brand{color:var(--paper);font-size:15px;}
-
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    .btn{transition:none;}
-  }
-</style>
+<title>kintowa | kintoneを、"使える"から"活かせる"へ</title>
+<meta name="description" content="kintowaは、kintoneの研修・プラグイン販売・チケット制相談会を通じて、企業のkintone活用を支援する専門会社です。1,000人以上への研修実績。">
+<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
 <header class="on-light">
   <div class="header-inner">
-    <a href="#top" class="brand">
+    <a href="index.html" class="brand">
       <svg class="ring" viewBox="0 0 22 22"><circle cx="11" cy="11" r="9" fill="none" stroke="#B4472A" stroke-width="2.4"/><circle cx="11" cy="11" r="3" fill="#B4472A"/></svg>
       kintowa
     </a>
     <nav class="links">
-      <a href="#about">kintowaについて</a>
-      <a href="#services">サービス</a>
-      <a href="#flow">ご利用の流れ</a>
-      <a href="#faq">よくある質問</a>
+      <a href="index.html" class="active">ホーム</a>
+      <a href="training.html">研修メニュー</a>
+      <a href="profile.html">プロフィール・実績</a>
+      <a href="price.html">料金</a>
     </nav>
-    <a href="#contact" class="nav-cta">お問い合わせ</a>
+    <a href="price.html#contact" class="nav-cta">お問い合わせ</a>
   </div>
 </header>
 
@@ -236,11 +29,11 @@
   <div class="wrap hero-grid">
     <div>
       <span class="kicker">kintone activation partner</span>
-      <h1>kintoneを、<br><em>現場で使いこなす</em>力に。</h1>
-      <p class="lead">研修・プラグイン・相談会。3つの support を、必要な分だけ組み合わせて、kintoneの活用を後押しします。</p>
+      <h1>kintoneを、<br><em>"使える"</em>から<br><em>"活かせる"</em>へ。</h1>
+      <p class="lead">研修・プラグイン・相談会。3つの support で、導入しただけで止まっているkintoneを、成果につながる運用に変えます。</p>
       <div class="hero-cta">
-        <a href="#services" class="btn btn-primary">サービスを見る</a>
-        <a href="#contact" class="btn btn-ghost">お問い合わせ</a>
+        <a href="training.html" class="btn btn-primary">研修メニューを見る</a>
+        <a href="price.html#contact" class="btn btn-ghost">お問い合わせ</a>
       </div>
     </div>
     <div class="chips" aria-hidden="true">
@@ -254,6 +47,27 @@
   </div>
 </section>
 
+<section class="stats" aria-label="実績数値">
+  <div class="wrap stats-table">
+    <div class="stat-cell">
+      <div class="stat-label">TRAINED</div>
+      <div class="stat-num">1,000<small>人以上が受講</small></div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">COMPANIES</div>
+      <div class="stat-num">10<small>社以上の企業に導入</small></div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">MUNICIPALITIES</div>
+      <div class="stat-num">5<small>件以上の自治体に導入</small></div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">CERTIFICATIONS</div>
+      <div class="stat-num">4<small>種のkintone資格を保有</small></div>
+    </div>
+  </div>
+</section>
+
 <section class="about on-light" id="about">
   <div class="wrap about-grid">
     <div>
@@ -262,7 +76,7 @@
     </div>
     <div>
       <h2>機能を知ることと、使いこなすことの間には、<br>小さくない距離があります。</h2>
-      <p style="margin-top:24px;">kintoneは、業務のちょっとした不便を、フィールドを組み合わせるだけでアプリに変えられるツールです。けれど「作れる」と「現場で運用が回る」の間には、設計の勘どころや、社内ルールの整備、細かな機能の過不足といった壁があります。</p>
+      <p style="margin-top:24px;">kintoneは、業務のちょっとした不便を、フィールドを組み合わせるだけでアプリに変えられるツールです。けれど「作れる」と「現場で運用が回り、成果につながる」の間には、設計の勘どころや、社内ルールの整備、細かな機能の過不足といった壁があります。</p>
       <p>kintowaは、その壁を越えるための3つの窓口――研修・プラグイン・相談会――を、企業の状況に合わせて必要な分だけ提供する会社です。</p>
     </div>
   </div>
@@ -276,19 +90,67 @@
     </div>
     <div class="svc-grid">
       <div class="svc-card f1">
+        <svg class="svc-icon f1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 6.5C10 4.6 6.8 3.9 3 4.5v14.8c3.8-.6 7-.1 9 1.7"/>
+          <path d="M12 6.5c2-1.9 5.2-2.6 9-2v14.8c-3.8-.6-7-.1-9 1.7"/>
+          <path d="M12 6.5v16"/>
+        </svg>
         <span class="tagchip">TRAINING / 研修</span>
         <h3>使い方ではなく、<br>活用の型を教える研修</h3>
         <p>操作方法だけでなく、業務設計や運用ルールづくりまで踏み込みます。管理者向け・利用者向け・部署別など、目的に応じて内容を組み立てます。</p>
+        <a href="training.html" class="svc-link">研修メニューを見る →</a>
       </div>
       <div class="svc-card f2">
+        <svg class="svc-icon f2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 7h4a1.6 1.6 0 0 0 0-3.2 1.6 1.6 0 0 1 3.2 0V7h4a1 1 0 0 1 1 1v4a1.6 1.6 0 0 0 3.2 0 1.6 1.6 0 0 1 0 3.2 1.6 1.6 0 0 0-3.2 0v4a1 1 0 0 1-1 1h-4a1.6 1.6 0 0 0 0 3.2 1.6 1.6 0 0 1-3.2 0V17H4a1 1 0 0 1-1-1v-4a1.6 1.6 0 0 1 0-3.2 1.6 1.6 0 0 0 0-3.2V8a1 1 0 0 1 1-1z"/>
+        </svg>
         <span class="tagchip">PLUGIN / プラグイン</span>
         <h3>標準機能で足りない部分を、<br>プラグインで補う</h3>
         <p>現場の細かな要望に応える自社開発プラグインを提供します。導入前の検証から、導入後の設定サポートまで対応します。</p>
+        <a href="price.html" class="svc-link">料金を見る →</a>
       </div>
       <div class="svc-card f3">
+        <svg class="svc-icon f3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v1a2 2 0 0 0 0 4v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1a2 2 0 0 0 0-4V8z"/>
+          <line x1="12" y1="6.5" x2="12" y2="17.5" stroke-dasharray="2 2.4"/>
+        </svg>
         <span class="tagchip">CONSULTING / 相談会</span>
         <h3>必要な分だけ相談できる<br>チケット制の相談会</h3>
         <p>月額契約ではなく、チケットを購入して必要なときに使う相談会です。運用の見直しやトラブル対応、設定の質問などをスポットで相談できます。</p>
+        <a href="price.html" class="svc-link">料金を見る →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="partner on-light" id="partner">
+  <div class="wrap partner-grid">
+    <div>
+      <span class="kicker">for partners</span>
+      <h2 style="margin-top:14px;">kintone導入支援会社の、<br>頼れる専門パートナーへ。</h2>
+      <p style="margin-top:20px;">開発・コンサル・研修講師、それぞれ4年ずつの現場経験を持つ担当者が、貴社の導入案件における「研修」「カスタマイズ」「導入後フォロー」を専門領域として引き受けます。自社に無い機能を、外注ではなくパートナーとして補完します。</p>
+    </div>
+    <div class="partner-badges">
+      <div class="partner-badge">
+        <span class="mk">01</span>
+        <div class="tx">
+          <b>kintone公式資格 4種を保有</b>
+          <span>アソシエイト／アプリデザインスペシャリスト／カスタマイズスペシャリスト／G検定</span>
+        </div>
+      </div>
+      <div class="partner-badge">
+        <span class="mk">02</span>
+        <div class="tx">
+          <b>開発 × コンサル × 研修講師、計12年</b>
+          <span>要件定義から現場への定着まで、一貫して対応できる立ち位置</span>
+        </div>
+      </div>
+      <div class="partner-badge">
+        <span class="mk">03</span>
+        <div class="tx">
+          <b>1,000人以上・企業10社以上への実績</b>
+          <span>研修設計から相談会まで、再現性のある型を持っています</span>
+        </div>
       </div>
     </div>
   </div>
@@ -343,26 +205,14 @@
   </div>
 </section>
 
-<section class="contact on-dark" id="contact">
-  <div class="wrap contact-inner">
-    <div>
-      <span class="kicker">contact</span>
-      <h2>まずは、気軽にご相談ください。</h2>
-      <p class="lead">導入前のご相談から、研修・プラグイン・相談会チケットのお申し込みまで、お気軽にお問い合わせください。</p>
-    </div>
-    <div class="contact-card">
-      <div class="row"><span>会社名</span><span>kintowa</span></div>
-      <div class="row"><span>メール</span><span><a href="mailto:info@example.com">info@example.com</a></span></div>
-      <div class="row"><span>受付時間</span><span>平日 10:00〜18:00</span></div>
-      <a href="mailto:info@example.com" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:22px;">メールで問い合わせる</a>
-      <p class="contact-note">※ このメールアドレスは仮のものです。実際のご連絡先に差し替えてご利用ください。Googleフォームや外部の問い合わせフォームサービスを埋め込むこともできます。</p>
-    </div>
-  </div>
-</section>
-
 <footer>
   <div class="wrap footer-inner">
     <span class="brand">kintowa</span>
+    <div class="footer-links">
+      <a href="training.html">研修メニュー</a>
+      <a href="profile.html">プロフィール・実績</a>
+      <a href="price.html">料金</a>
+    </div>
     <span>© 2026 kintowa. All rights reserved.</span>
   </div>
 </footer>
